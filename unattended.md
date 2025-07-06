@@ -10,17 +10,21 @@
       publicKeyToken="31bf3856ad364e35"
       language="neutral"
       versionScope="nonSxS">
-      
-      <!-- Change the language to German (de-DE) -->
+
+      <!-- Set language to German (de-DE) -->
       <SetupUILanguage>
         <UILanguage>de-DE</UILanguage>
       </SetupUILanguage>
-      
+
+      <!-- Set input (keyboard) locale to German -->
       <InputLocale>de-DE</InputLocale>
+      <!-- Set regional settings to German -->
       <SystemLocale>de-DE</SystemLocale>
+      <!-- Set user interface language to German -->
       <UILanguage>de-DE</UILanguage>
+      <!-- Set user locale to German -->
       <UserLocale>de-DE</UserLocale>
-      
+
     </component>
     <component
       name="Microsoft-Windows-Setup"
@@ -28,30 +32,32 @@
       publicKeyToken="31bf3856ad364e35"
       language="neutral"
       versionScope="nonSxS">
-      
-      <!-- Disk and partition configuration (can be customized) -->
+
+      <!-- Disk and partition configuration (customize as needed) -->
       <DiskConfiguration>
         <Disk wcm:action="add">
           <DiskID>0</DiskID>
           <WillWipeDisk>true</WillWipeDisk>
           <CreatePartitions>
+            <!-- Example partition for EFI system -->
             <CreatePartition wcm:action="add">
               <Order>1</Order>
-              <Type>Primary</Type>
+              <Type>EFI</Type>
               <Size>100</Size>
             </CreatePartition>
+            <!-- Main Windows partition -->
             <CreatePartition wcm:action="add">
               <Order>2</Order>
               <Type>Primary</Type>
-              <Extend>true</Extend>
+              <Size>40000</Size> <!-- Change size as needed -->
             </CreatePartition>
           </CreatePartitions>
           <ModifyPartitions>
             <ModifyPartition wcm:action="add">
               <Order>1</Order>
               <PartitionID>1</PartitionID>
-              <Label>System</Label>
-              <Format>NTFS</Format>
+              <Label>SYSTEM</Label>
+              <Format>FAT32</Format>
               <Active>true</Active>
             </ModifyPartition>
             <ModifyPartition wcm:action="add">
@@ -64,15 +70,16 @@
         </Disk>
       </DiskConfiguration>
 
-      <!-- Specify OS image to install -->
+      <!-- Specify the OS image to install (it's a placeholder, customize if needed) -->
       <ImageInstall>
         <OSImage>
           <InstallTo>
             <DiskID>0</DiskID>
-            <PartitionID>2</PartitionID>
+            <PartitionID>2</PartitionID> <!-- Change partition ID if needed -->
           </InstallTo>
         </OSImage>
       </ImageInstall>
     </component>
   </settings>
+  <!-- Additional configuration settings can be added here -->
 </unattend>
