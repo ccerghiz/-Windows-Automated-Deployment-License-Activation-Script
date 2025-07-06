@@ -1,6 +1,3 @@
-- ## Example `unattended.xml` file
-
-```xml
 <?xml version="1.0" encoding="utf-8"?>
 <unattend xmlns="urn:schemas-microsoft-com:unattend">
   <settings pass="windowsPE">
@@ -10,18 +7,21 @@
       publicKeyToken="31bf3856ad364e35"
       language="neutral"
       versionScope="nonSxS">
-
-      <!-- Set language to German (de-DE) -->
+      
+      <!-- Set the language to German (de-DE) -->
       <SetupUILanguage>
         <UILanguage>de-DE</UILanguage>
       </SetupUILanguage>
 
       <!-- Set input (keyboard) locale to German -->
       <InputLocale>de-DE</InputLocale>
+      
       <!-- Set regional settings to German -->
       <SystemLocale>de-DE</SystemLocale>
+      
       <!-- Set user interface language to German -->
       <UILanguage>de-DE</UILanguage>
+      
       <!-- Set user locale to German -->
       <UserLocale>de-DE</UserLocale>
 
@@ -38,20 +38,22 @@
         <Disk wcm:action="add">
           <DiskID>0</DiskID>
           <WillWipeDisk>true</WillWipeDisk>
+
+          <!-- Create partitions for EFI and Windows -->
           <CreatePartitions>
-            <!-- Example partition for EFI system -->
             <CreatePartition wcm:action="add">
               <Order>1</Order>
               <Type>EFI</Type>
-              <Size>100</Size>
+              <Size>100</Size> <!-- Change size as needed -->
             </CreatePartition>
-            <!-- Main Windows partition -->
             <CreatePartition wcm:action="add">
               <Order>2</Order>
               <Type>Primary</Type>
               <Size>40000</Size> <!-- Change size as needed -->
             </CreatePartition>
           </CreatePartitions>
+
+          <!-- Modify and format partitions -->
           <ModifyPartitions>
             <ModifyPartition wcm:action="add">
               <Order>1</Order>
@@ -67,19 +69,36 @@
               <Format>NTFS</Format>
             </ModifyPartition>
           </ModifyPartitions>
+
         </Disk>
       </DiskConfiguration>
 
-      <!-- Specify the OS image to install (it's a placeholder, customize if needed) -->
+      <!-- Specify the OS image to install -->
       <ImageInstall>
         <OSImage>
           <InstallTo>
             <DiskID>0</DiskID>
-            <PartitionID>2</PartitionID> <!-- Change partition ID if needed -->
+            <PartitionID>2</PartitionID>
           </InstallTo>
         </OSImage>
       </ImageInstall>
     </component>
   </settings>
-  <!-- Additional configuration settings can be added here -->
+
+  <!-- Windows activation key -->
+  <settings pass="oobeSystem">
+    <component
+      name="Microsoft-Windows-Shell-Setup"
+      processorArchitecture="amd64"
+      publicKeyToken="31bf3856ad364e35"
+      language="neutral"
+      versionScope="nonSxS">
+
+      <!-- Insert your Windows license key below -->
+      <ProductKey>
+        <Key>YOUR-WINDOWS-ACTIVATION-KEY</Key> <!-- Replace with your actual key -->
+      </ProductKey>
+
+    </component>
+  </settings>
 </unattend>
